@@ -18,9 +18,9 @@ import uk.gov.justice.services.fileservice.domain.FileReference;
 import uk.gov.justice.services.fileservice.it.helpers.IntegrationTestDataSourceProvider;
 import uk.gov.justice.services.fileservice.repository.ContentJdbcRepository;
 import uk.gov.justice.services.fileservice.repository.FileStore;
-import uk.gov.justice.services.fileservice.repository.AnsiMetadataSqlProvider;
 import uk.gov.justice.services.fileservice.repository.MetadataJdbcRepository;
 import uk.gov.justice.services.fileservice.repository.MetadataUpdater;
+import uk.gov.justice.services.fileservice.repository.PostgresMetadataSqlProvider;
 import uk.gov.justice.services.jdbc.persistence.InitialContextFactory;
 import uk.gov.justice.services.test.utils.core.files.ClasspathFileResource;
 import uk.gov.justice.services.test.utils.core.jdbc.LiquibaseDatabaseBootstrapper;
@@ -74,7 +74,7 @@ public class FileServiceIT {
 
             IntegrationTestDataSourceProvider.class,
 
-            AnsiMetadataSqlProvider.class,
+            PostgresMetadataSqlProvider.class,
             ContentJdbcRepository.class,
             FileStore.class,
             MetadataJdbcRepository.class,
@@ -124,7 +124,7 @@ public class FileServiceIT {
             final JsonObject retrievedMetadata = fileReference.getMetadata();
             assertThat(retrievedMetadata.getString("metadataField"), is("metadataValue"));
             assertThat(retrievedMetadata.getString("mediaType"), is("image/jpeg"));
-            assertThat(retrievedMetadata.getString("createdAt"), is(notNullValue()  ));
+            assertThat(retrievedMetadata.getString("createdAt"), is(notNullValue()));
 
             final InputStream contentStream = fileReference.getContentStream();
 

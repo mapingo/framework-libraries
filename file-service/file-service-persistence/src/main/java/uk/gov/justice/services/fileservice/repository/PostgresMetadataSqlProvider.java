@@ -1,8 +1,8 @@
 package uk.gov.justice.services.fileservice.repository;
 
-import javax.enterprise.inject.Alternative;
+import javax.enterprise.inject.Default;
 
-@Alternative
+@Default
 public class PostgresMetadataSqlProvider implements MetadataSqlProvider {
 
     private static final String INSERT_SQL = "INSERT INTO metadata(metadata, file_id) values (to_json(?::json), ?)";
