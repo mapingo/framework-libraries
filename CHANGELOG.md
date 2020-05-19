@@ -5,6 +5,11 @@ on [Keep a CHANGELOG](http://keepachangelog.com/). This project adheres to
 
 ## Unreleased
 
+## [7.0.2] - 2020-05-19
+
+### Added
+- Created framework-utilities-bom 
+
 ## [7.0.1] - 2020-05-18
 
 ### Changed

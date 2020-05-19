@@ -19,6 +19,7 @@
         <module>maven-test-utils</module>
         <module>test-utils</module>
         <module>utilities</module>
+        <module>framework-utilities-bom</module>
     </modules>
 
     <properties>
