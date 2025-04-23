@@ -9,8 +9,10 @@ import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import org.awaitility.pollinterval.PollInterval;
 import uk.gov.justice.services.test.utils.core.rest.RestClient;
 
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
@@ -27,9 +29,9 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 
 /**
  * Client for polling a rest endpoint and matching the response against the specified Matcher.
- *
+ * <p>
  * To Use:
- *
+ * <p>
  * Poll until the response has specified number of events with required json payload:
  * <pre><blockquote>
  *
@@ -57,12 +59,12 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  *      ;
  *
  * </blockquote></pre>
- *
+ * <p>
  * The call is configured using <code>RequestParams</code>. This object is most easily created using
  * a <code>RequestParamsBuilder</code> which takes a url and media type and will supply all other
  * required parameters with defaults. Overriding these defaults is done in the usual builder pattern
  * way.
- *
+ * <p>
  * Poll until the response has specified substring in the payload:
  * <pre><blockquote>
  *
@@ -87,7 +89,7 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
  *      ;
  *
  * </blockquote></pre>
- *
+ * <p>
  * Poll ignoring certain response status, until the response has specified number of events with
  * required data:
  * <pre><blockquote>
@@ -133,11 +135,30 @@ public class RestPoller {
     private Matcher<ResponseData> expectedResponseMatcher;
     private Optional<Matcher<ResponseData>> ignoredResponseMatcher = empty();
 
+    /**
+     * Instantiates a new rest poller
+     *
+     * @deprecated use RestPoller(RestClient, requestParams, pollInterval, timeout),
+     * default polling values defined here are not viable for most of usages
+     */
     @VisibleForTesting
+    @Deprecated
     RestPoller(final RestClient restClient, final RequestParams requestParams) {
         this.requestParams = requestParams;
         this.restClient = restClient;
-        this.await = await().with().pollInterval(1, SECONDS).with().timeout(10, SECONDS);
+        this.await = await().with()
+                .pollInterval(1, SECONDS)
+                .with().timeout(10, SECONDS);
+    }
+
+    @VisibleForTesting
+    RestPoller(final RestClient restClient, final RequestParams requestParams, PollInterval pollInterval, Duration timeout) {
+        this.requestParams = requestParams;
+        this.restClient = restClient;
+        this.await = await()
+                .with()
+                .pollInterval(pollInterval)
+                .timeout(timeout);
     }
 
     /**
@@ -145,7 +166,10 @@ public class RestPoller {
      *
      * @param requestParams request parameters
      * @return this
+     * @deprecated use poll(RestClient, requestParams, pollInterval, timeout),
+     * default polling values defined here are not viable for most of usages
      */
+    @Deprecated
     public static RestPoller poll(final RequestParams requestParams) {
         return new RestPoller(new RestClient(), requestParams);
     }
@@ -155,9 +179,23 @@ public class RestPoller {
      *
      * @param requestParamsBuilder request parameters builder
      * @return this
+     * @deprecated use poll(RestClient, requestParams, pollInterval, timeout),
+     * default polling values defined here are not viable for most of usages
      */
+    @Deprecated
     public static RestPoller poll(final RequestParamsBuilder requestParamsBuilder) {
         return new RestPoller(new RestClient(), requestParamsBuilder.build());
+    }
+
+
+    /**
+     * Instantiates a new rest poller
+     *
+     * @param requestParams request parameters
+     * @return this
+     */
+    public static RestPoller poll(final RequestParams requestParams, PollInterval pollInterval, Duration timeout) {
+        return new RestPoller(new RestClient(), requestParams, pollInterval, timeout);
     }
 
     /**
@@ -218,8 +256,19 @@ public class RestPoller {
     }
 
     /**
-     * Poll at most <code>timeout</code> before throwing a timeout exception.
+     * Overrides the delay between polls. If not specified a default of 1 second is used.
      *
+     * @param pollInterval PollInterval Strategy, please look {@link FibonacciPollWithStartAndMax}
+     * @return this
+     */
+    public RestPoller pollInterval(PollInterval pollInterval) {
+        this.await = this.await.with().pollInterval(pollInterval);
+        return this;
+    }
+
+    /**
+     * Poll at most <code>timeout</code> before throwing a timeout exception.
+     * <p>
      * Overrides the default timeout period. If not specified a default of 10 seconds is used.
      *
      * @param timeout the timeout
@@ -268,6 +317,7 @@ public class RestPoller {
         }
         return expectedResponseMatcher;
     }
+
 
     private class CallableRestClient implements Callable<ResponseData> {
         private final RequestParams requestParams;
