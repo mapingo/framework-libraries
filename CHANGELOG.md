@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+# [17.103.0-M4] - 2025-05-28
+- Update common-bom in order to:
+    - Add dependencies for Micometer Metrics 1.15.0
+
 # [17.103.0-M3] - 2025-05-23
 ### Changed
 - Moved prometheus metrics to cpp-platform-libraries in with the new azure metrics
