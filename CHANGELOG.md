@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file, which loose
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+# [17.103.0-M5] - 2025-06-12
 - Remove obsolete framework-metrics dependency from bom
 
 # [17.103.0-M4] - 2025-05-28
