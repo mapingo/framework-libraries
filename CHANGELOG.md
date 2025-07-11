@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file, which loose
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- Update maven-framework-parent-pom to 17.103.0
+- Update maven-common-bom to 17.103.1
+- Update file-service to 17.103.1
 
 # [17.103.0-M5] - 2025-06-12
 - Remove obsolete framework-metrics dependency from bom
