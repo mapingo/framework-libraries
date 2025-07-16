@@ -5,27 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-# [17.103.0-M6] - 2025-07-11
-### Changed
-- Update maven-framework-parent-pom to 17.103.0
-- Update maven-common-bom to 17.103.1
-- Update file-service to 17.103.1
-
-# [17.103.0-M5] - 2025-06-12
-- Remove obsolete framework-metrics dependency from bom
-
-# [17.103.0-M4] - 2025-05-28
-- Update common-bom in order to:
-    - Add dependencies for Micometer Metrics 1.15.0
-
-# [17.103.0-M3] - 2025-05-23
-### Changed
-- Moved prometheus metrics to cpp-platform-libraries in with the new azure metrics
-
-# [17.103.0-M2] - 2025-05-22
+# [17.103.0] - 2025-07-16
 ### Changed
 - Moved file-service modules to separate git repo hmcts/cp-file-service
 - Replaced file-service dependencies with file-service-bom 17.103.0 import
+- Moved prometheus metrics to cpp-platform-libraries in with the new azure metrics
+- Add dependencies for Micometer Metrics 1.15.0
 
 # [17.102.2] - 2025-04-16
 ### Changed
