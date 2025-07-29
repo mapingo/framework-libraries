@@ -202,6 +202,11 @@
                 <version>${framework-libraries.version}</version>
             </dependency>
             <dependency>
+                <groupId>uk.gov.justice.framework.libraries</groupId>
+                <artifactId>framework-libraries-version</artifactId>
+                <version>${framework-libraries.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>uk.gov.justice.maven.generator</groupId>
                 <artifactId>generator-plugin</artifactId>
                 <version>${framework-libraries.version}</version>

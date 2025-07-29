@@ -1,0 +1,6 @@
+{
+    "projectName": "Framework Libraries",
+    "displayOrder": 20,
+    "projectVersion": "${project.version}",
+    "buildTimestamp": "${maven.build.timestamp}"
+}
