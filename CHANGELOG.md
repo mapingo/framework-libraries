@@ -5,9 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-# [17.104.0-M2] - 2025-07-29
+# [17.104.0-M3] - 2025-07-29
 ### Changed
 - Updated version to 17.104.x for the new framework E
+- Updated file-service to 17.104.0-M1
 ### Added
 - New module `framework-libraries-version` that contains a maven generated json file that has this project's version number
 ### Security
