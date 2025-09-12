@@ -1,5 +1,6 @@
 package uk.gov.justice.services.ejb.timer;
 
+import javax.ejb.Timer;
 import javax.ejb.TimerConfig;
 import javax.ejb.TimerService;
 import javax.inject.Inject;
@@ -9,7 +10,7 @@ public class TimerServiceManager {
     @Inject
     private TimerConfigFactory timerConfigFactory;
 
-    public void createIntervalTimer(
+    public Timer createIntervalTimer(
             final String timerJobName,
             final long timerStartWaitMilliseconds,
             final long timerIntervalMilliseconds,
@@ -19,10 +20,10 @@ public class TimerServiceManager {
         timerConfig.setPersistent(false);
         timerConfig.setInfo(timerJobName);
 
-        timerService.createIntervalTimer(timerStartWaitMilliseconds, timerIntervalMilliseconds, timerConfig);
+        return timerService.createIntervalTimer(timerStartWaitMilliseconds, timerIntervalMilliseconds, timerConfig);
     }
 
-    public void createSingleActionTimer(
+    public Timer createSingleActionTimer(
             final String timerJobName,
             final long duration,
             final TimerService timerService) {
@@ -31,6 +32,6 @@ public class TimerServiceManager {
         timerConfig.setPersistent(false);
         timerConfig.setInfo(timerJobName);
 
-        timerService.createSingleActionTimer(duration, timerConfig);
+        return timerService.createSingleActionTimer(duration, timerConfig);
     }
 }
