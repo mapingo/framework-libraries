@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+# [17.104.0-M4] - 2025-09-15
+### Changed
+- TimerServiceManager now returns created Timer
+- 
 # [17.104.0-M3] - 2025-07-29
 ### Changed
 - Updated version to 17.104.x for the new framework E
